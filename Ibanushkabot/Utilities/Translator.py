@@ -6,7 +6,7 @@ from io import BytesIO
 class TranslateService():
 
     languages={"spanish":"es","english":"en","russian":"ru","french":"fr","portuguese":"pt",
-                "german":"de","italian":"it","ukrainian":"uk","japanese":"ja","chinese":"zh-CN",
+                "german":"de","italian":"it","ukrainian":"uk","japanese":"ja","chinese":"zh",
                 "hindi":"hi","arabic":"ar","bengali":"bn","indonesian":"id"}
 
     def translate(self,message):
