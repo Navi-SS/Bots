@@ -3,7 +3,7 @@ from Utilities.Happi import HappiServices
 from Utilities.Translator import TranslateService
 import telebot
 
-API_TOKEN='1518556467:AAF1SvPvdh4-Q9b_n7S9Yf2acojCJxTSCEk'
+API_TOKEN='API-KEY-Telegram'
 bot=telebot.TeleBot(API_TOKEN)
 
 #Services
