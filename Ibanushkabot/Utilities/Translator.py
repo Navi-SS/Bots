@@ -11,10 +11,12 @@ class TranslateService():
 
     def translate(self,message):
         message=message.split()
+        languagein=message[0].lower()
+        languageout=message[1].lower()
         if len(message) >= 3:
-            if message[0] in self.languages and message[1] in self.languages:
-                input_lang=self.languages[message[0]]
-                output_lang=self.languages[message[1]]
+            if languagein in self.languages and languageout in self.languages:
+                input_lang=self.languages[languagein]
+                output_lang=self.languages[languageout]
                 text=' '.join(message[2:])
                 translator = google_translator()
                 translate_text = translator.translate(text,lang_src=input_lang,lang_tgt=output_lang)
@@ -27,7 +29,7 @@ class TranslateService():
     def voice_translate(self,language,message):
         if message is not None:
             message=quote(message)
-            voice_uri = f"https://translate.google.com/translate_tts?ie=UTF-8&q={message}&tl={self.languages[language]}-us&client=tw-ob&idx=0"
+            voice_uri = f"https://translate.google.com/translate_tts?ie=UTF-8&q={message}&tl={self.languages[language.lower()]}-us&client=tw-ob&idx=0"
             res = requests.get(voice_uri,headers={'User-Agent': 'Mozilla/5.0'})
             if res.status_code == 200:
                 return BytesIO(res.content)
