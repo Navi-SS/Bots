@@ -11,11 +11,9 @@ Test it [here!][1]
 ### /help
 Returns a menu with all available commands
 #### input: 
-...
-
+```
 /help
-
-...
+```
 #### output:
 ...
 * /youtube <"video name">
