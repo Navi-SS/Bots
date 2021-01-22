@@ -15,63 +15,49 @@ Returns a menu with all available commands
 /help
 ```
 #### output:
-...
+```
 * /youtube <"video name">
 * /song <"song name">
 * /translate <"source_language destination_language phrase">
 * /help
 * /example
 * For more help contact the admin
-...
+```
 
 ### /example
 Returns a menu with all available commands with examples
 #### input: 
-...
+```
 /example
-...
+```
 #### output:
-...
+```
 * /youtube life on mars David Bowie
 * /song walk away Franz Ferdinand
 * /translate english spanish Hello World
 * /help
 * /example
 * if you need more help contact the admin
-...
+```
 
 ### /youtube <"video name">
 Returns the first match on youtube search
 #### input: 
+```
 /youtube Ode to the mets The Strokes
+```
 #### output:
+```
 video url [here!][3]
-
-### /mylocation
-Returns my IP address location data
-#### input:
-/mylocation
-#### output:
-* Country: US
-* Region: 
-* Timezone: America/Chicago
-* IP: 142.250.69.46
-
-### /location <"IP">
-Returns my IP address location data
-#### input:
-/location 172.217.15.14
-#### output:
-* Country: US
-* Region: 
-* Timezone: America/Chicago
-* IP: 172.217.15.14
-
+```
 ### /song <"song name">
 Returns song data with lyrics if it has
 #### input:
+```
 /song Take me out Franz Ferdinand
+```
 #### output:
+```
 Song name: Take Me Out
 
 Album: Franz Ferdinand
@@ -133,19 +119,42 @@ I know I won't be leaving here (with you)
 I know I won't be leaving here with you
 
 Cover [here!][4]
-
+```
 ### /translate <"source_language destination_language phrase">
 Returns the translate phrase with an audio message to hear it
 #### input:
+```
 /translate spanish english Estos es una prueba, Hola Mundo.
+```
 #### output:
+```
 This is a test, Hello World.
 Audio message [here!][5]
+```
 
 ## API-Keys
 
 #### Happi
 If you need to create your own Happi.dev API-Key just click [here!][2]
+
+## Pyteseract
+
+It's a requirement to install this tool in your OS
+
+### GNU/LINUX
+```
+sudo apt update
+sudo apt install tesseract-ocr
+sudo apt install libtesseract-dev
+```
+### Mac
+```
+brew install tesseract
+```
+### Windows
+```
+download binary [here!][6] then add pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files (x86)\\Tesseract-OCR\\tesseract.exe' to your script. (replace path of tesseract binary if necessary)
+```
 
 ## Issues with Ibanushkabot
 
@@ -156,3 +165,4 @@ If you discover any issue with Ibanushkabot, please contact me. I'll help you so
 [3]: https://www.youtube.com/watch?v=BjC0KUxiMhc
 [4]: https://ia800706.us.archive.org/29/items/mbid-462210cb-c90c-38f9-8fcf-1a04d7c86729/mbid-462210cb-c90c-38f9-8fcf-1a04d7c86729-4776442757_thumb500.jpg
 [5]: https://translate.google.com/translate_tts?ie=UTF-8&q=This%20is%20a%20test%2C%20Hello%20World.%20&tl=en-us&client=tw-ob&idx=0
+[6]: https://github.com/UB-Mannheim/tesseract/wiki
