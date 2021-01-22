@@ -3,7 +3,7 @@ import requests
 class HappiServices():
 
     def __init__(self):
-        self.API_KEY='4ef47arWahLwbMIddk9ZXsuZ3HvWOqEbpg8juLc2AuUU5t5P0F6S06kH'
+        self.API_KEY='Happi-Token'
         self.headers={'x-happi-key':self.API_KEY}
         self.url_location='https://api.happi.dev/v1/geoip/'
         self.url_song='https://api.happi.dev/v1/music'
