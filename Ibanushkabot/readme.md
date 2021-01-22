@@ -47,9 +47,7 @@ Returns the first match on youtube search
 /youtube Ode to the mets The Strokes
 ```
 #### output:
-```
 video url [here!][3]
-```
 ### /song <"song name">
 Returns song data with lyrics if it has
 #### input:
@@ -117,9 +115,8 @@ I know I won't be leaving here (with you)
 I know I won't be leaving here
 I know I won't be leaving here (with you)
 I know I won't be leaving here with you
-
-Cover [here!][4]
 ```
+Cover [here!][4]
 ### /translate <"source_language destination_language phrase">
 Returns the translate phrase with an audio message to hear it
 #### input:
@@ -129,8 +126,8 @@ Returns the translate phrase with an audio message to hear it
 #### output:
 ```
 This is a test, Hello World.
-Audio message [here!][5]
 ```
+Audio message [here!][5]
 
 ## API-Keys
 
@@ -152,8 +149,9 @@ sudo apt install libtesseract-dev
 brew install tesseract
 ```
 ### Windows
+download binary [here!][6]
 ```
-download binary [here!][6] then add pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files (x86)\\Tesseract-OCR\\tesseract.exe' to your script. (replace path of tesseract binary if necessary)
+Then add pytesseract.pytesseract.tesseract_cmd = 'C:\\Program Files (x86)\\Tesseract-OCR\\tesseract.exe' to your script. (replace path of tesseract binary if necessary)
 ```
 
 ## Issues with Ibanushkabot
