@@ -11,30 +11,34 @@ Test it [here!][1]
 ### /help
 Returns a menu with all available commands
 #### input: 
+...
 /help
+...
 #### output:
+...
 * /youtube <"video name">
-* /mylocation
-* /location <"IP">
 * /song <"song name">
 * /translate <"source_language destination_language phrase">
 * /help
 * /example
 * For more help contact the admin
+...
 
 ### /example
 Returns a menu with all available commands with examples
 #### input: 
+...
 /example
+...
 #### output:
+...
 * /youtube life on mars David Bowie
-* /mylocation
-* /location 172.217.15.14
 * /song walk away Franz Ferdinand
 * /translate english spanish Hello World
 * /help
 * /example
 * if you need more help contact the admin
+...
 
 ### /youtube <"video name">
 Returns the first match on youtube search
