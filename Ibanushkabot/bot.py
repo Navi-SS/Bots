@@ -1,7 +1,10 @@
 from Utilities.Youtube import YoutubeService
 from Utilities.Happi import HappiServices
 from Utilities.Translator import TranslateService
+from Utilities.Images import ImageService
 import telebot
+import pandas as pd
+from os import remove
 
 API_TOKEN='API-KEY-Telegram'
 bot=telebot.TeleBot(API_TOKEN)
@@ -10,36 +13,40 @@ bot=telebot.TeleBot(API_TOKEN)
 youtube=YoutubeService()
 happi=HappiServices()
 trans=TranslateService()
+image=ImageService()
 
 #Welcome
 @bot.message_handler(commands=['start'])
 def send_bienvenida(message):
-    bot.reply_to(message,'Welcome to Navibot use /help or /example to see all commands')
+    datos=pd.read_csv('datos.csv')
+    if message.chat.id not in list(datos['id']):
+        n=datos.shape[0]
+        datos.loc[n]=[message.chat.id,message.chat.first_name]
+        datos.to_csv('datos.csv')
+    bot.reply_to(message,'Bienvenido a NaviBot usa /help o /example para ver los comandos disponibles')
 
 #Help
 @bot.message_handler(commands=["help"])
 def send_help(message):
-    consult = """/youtube <video name>
-/mylocation
-/location <IP>
-/song <song name>
-/translate <source_language destination_language phrase>
+    consult = """/youtube <nombre del video>
+/song <nombre de la cancion>
+/translate <idioma_origen idioma_destino Frase a traducir>
 /help
 /example
-For more help contact the admin"""
+Envia una imagen con texto y se traducira
+Si quieres mas ayuda, contacta al administrador"""
     bot.reply_to(message,consult)
 
 #Example
 @bot.message_handler(commands=["example"])
 def send_example(message):
     consult = """/youtube life on mars David Bowie
-/mylocation
-/location 172.217.15.14
 /song walk away Franz Ferdinand
-/translate english spanish Hello World
+/translate ingles ruso  Hello World
 /help
 /example
-if you need more help contact the admin"""
+Envia una imagen con texto y se traducira
+Si quieres mas ayuda, contacta al administrador"""
     bot.reply_to(message,consult)
 
 #Return the first youtube video
@@ -51,27 +58,9 @@ def send_video(message):
         if video != None:
             bot.reply_to(message,video,parse_mode="MARKDOWN")
         else:
-            bot.reply_to(message,"Error sending video name")
+            bot.reply_to(message,"Error al enviar el nombre del video")
     except IndexError:
-        bot.reply_to(message,"No video name detected")
-
-#Return your data IP
-@bot.message_handler(commands=['mylocation'])
-def send_mylocation(message):
-    bot.reply_to(message,happi.my_location())
-
-#Return the IP data
-@bot.message_handler(commands=['location'])
-def send_location(message):
-    try:
-        consult = message.text[10:] # location to look
-        ip_location = happi.location(consult)
-        if ip_location != None:
-            bot.reply_to(message,ip_location)
-        else:
-            bot.reply_to(message,"Error sending IP")
-    except IndexError:
-        bot.reply_to(message,"No IP detected")
+        bot.reply_to(message,"No hay nombre del video")
 
 #Return the song information
 @bot.message_handler(commands=['song'])
@@ -82,9 +71,9 @@ def send_song(message):
         if song != None:
             bot.reply_to(message,song,parse_mode="MARKDOWN")
         else:
-            bot.reply_to(message,"Error sending song name")
+            bot.reply_to(message,"Error al enviar el nombre de la cancion")
     except IndexError:
-        bot.reply_to(message,"No song name detected")
+        bot.reply_to(message,"No hay nombre de la cancion")
 
 #Return the translate phrase
 @bot.message_handler(commands=['translate'])
@@ -97,13 +86,30 @@ def send_translate(message):
             bot.reply_to(message,text)
             bot.send_voice(message.chat.id,voice)
         else:
-            bot.reply_to(message,"Error sending the structure")
+            bot.reply_to(message,"Error al enviar la estructura, intenta con uno de los siguientes idiomas: español, ingles, ruso, frances, portugues, aleman, italiano, ucraniano, japones, chino, hindi, arabe, bengali, indonesio")
     except IndexError:
-        bot.reply_to(message,"Error sending the structure")
+        bot.reply_to(message,"Los idiomas disponibles son: español, ingles, ruso, frances, portugues, aleman, italiano, ucraniano, japones, chino, hindi, arabe, bengali, indonesio")
+
+@bot.message_handler(content_types=['photo'])
+def send_photo_translate(message):
+    file_id=bot.get_file(message.photo[-1].file_id)
+    file_id=file_id.file_path
+    download=bot.download_file(file_id)
+    with open('image.jpg','wb') as new_file:
+        new_file.write(download)
+    text=image.read_image('image.jpg')
+    if text != None:
+        text=trans.all_translate(text)
+        bot.reply_to(message,text)
+    else:
+        bot.reply_to(message,"La imagen no tiene letras")
+    remove('image.jpg')
+
+
 
 #For other kind of messages
 @bot.message_handler(func=lambda message: True)
 def echo_message(message):
-    bot.reply_to(message, "Use /help or /example to see all bot's commands")
+    bot.reply_to(message, "Usa /help o /example para ver todos los comandos del bot")
 
 bot.polling(True)
