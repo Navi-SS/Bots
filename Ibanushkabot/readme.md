@@ -121,7 +121,7 @@ Cover [here!][4]
 Returns the translate phrase with an audio message to hear it
 #### input:
 ```
-/translate spanish english Estos es una prueba, Hola Mundo.
+/translate español ingles Estos es una prueba, Hola Mundo.
 ```
 #### output:
 ```
