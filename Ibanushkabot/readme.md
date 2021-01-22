@@ -12,7 +12,9 @@ Test it [here!][1]
 Returns a menu with all available commands
 #### input: 
 ...
+
 /help
+
 ...
 #### output:
 ...
