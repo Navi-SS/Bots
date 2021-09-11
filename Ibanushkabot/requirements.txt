@@ -3,3 +3,4 @@ opencv-python==4.4.0.44
 pyTelegramBotAPI==3.7.5
 pytesseract==0.3.7
 requests==2.24.0
+pandas
